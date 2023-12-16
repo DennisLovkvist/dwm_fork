@@ -984,8 +984,7 @@ horizontal(Monitor *m)
 		return;
 	else /* Split vertically */
 		for(i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-			resize(c,
-			 m->wx + (i * (m->mw / n)),m->wy + m->gappx,m->mw / n - (2 * c->bw),m->wh - (2 * c->bw) - m->gappx, False);
+			resize(c,m->wx + m->gappx + (i * ((m->mw) / n)),m->wy + m->gappx,m->mw / n - (2 * c->bw) - m->gappx,m->wh - m->gappx - (2 * c->bw), False);
 }
 void
 incnmaster(const Arg *arg)
@@ -1713,12 +1712,12 @@ tile(Monitor *m)
 		mw = m->ww - m->gappx;
 	for (i = 0, my = ty = m->gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
-			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gappx;
+			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
 			resize(c, m->wx + m->gappx, m->wy + my, mw - (2*c->bw) - m->gappx, h - (2*c->bw), 0);
 			if (my + HEIGHT(c) < m->wh)
 				my += HEIGHT(c) + m->gappx;
 		} else {
-			h = (m->wh - ty) / (n - i) - m->gappx;
+			h = (m->wh - ty) / (n - i);
 			resize(c, m->wx + mw + m->gappx, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappx, h - (2*c->bw), 0);
 			if (ty + HEIGHT(c) < m->wh)
 				ty += HEIGHT(c) + m->gappx;
