@@ -984,7 +984,8 @@ horizontal(Monitor *m)
 		return;
 	else /* Split vertically */
 		for(i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-			resize(c, m->wx + i * m->mw / n, m->wy, m->mw / n - (2 * c->bw), m->wh - (2 * c->bw), False);
+			resize(c,
+			 m->wx + (i * (m->mw / n)),m->wy + m->gappx,m->mw / n - (2 * c->bw),m->wh - (2 * c->bw) - m->gappx, False);
 }
 void
 incnmaster(const Arg *arg)
